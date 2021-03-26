@@ -1,11 +1,13 @@
 class CreateOrders < ActiveRecord::Migration[6.1]
   def change
     create_table :orders do |t|
-      t.sales_order_id :string
-      t.purchase_order_id :string 
-      t.received_on :date 
-      t.due_by :date 
-      
+      t.string :sales_order_id
+      t.string :purchase_order_id
+      t.datetime :received_on 
+      t.datetime :due_by 
+      t.string :status 
+      t.integer :priority
+
       t.timestamps
     end
   end
