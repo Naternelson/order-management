@@ -12,7 +12,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
+    @products = Product.all 
     @order = Order.new
+    empty_order_item
   end
 
   # GET /orders/1/edit
@@ -60,10 +62,15 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+
+    end
+
+    def empty_order_item
+      @order.order_items.build if @order.order_items.empty?
     end
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:sales_order_id, :purchase_order_id, customer_attributes: [name])
+      params.require(:order).permit(:sales_order_id, :purchase_order_id, customer_attributes: [:name])
     end
 end

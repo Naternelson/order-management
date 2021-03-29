@@ -10,11 +10,29 @@
       </ul>
     </div>
   <% end %>
+  <%= f.label :purchase_order_id, "Purchase Order Number" %>
+  <%= f.text_field :purchase_order_id %>
+
+  <%= f.label :sales_order_id, "Sales Order Number"  %>
+  <%= f.text_field :sales_order_id %>
+  
+  <%= f.fields_for :order_items do |o| %>
+    <%= o.collection_select :product_id, Product.all, :id, :name, include_blank: 'Select a Product'  %>
+    <%= o.label :amount %>
+    <%= o.number_field :amount %>
+  <% end %>
+  <%= link_to "Add a New Product", new_product_path %>
 
   <%= f.label :customer %>
-  <%= f.fields_for :customer, order.customers.build do |c| %>
+  <%= f.fields_for :customer, order.build_customer do |c| %>
     <% c.label :name %>
     <% c.text_field :name %>
   <% end %>
+  <br>
   <%= f.submit %>
 <% end %>
+
+<!--
+collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
+
+-->
