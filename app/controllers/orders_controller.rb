@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
-  after_action :empty_order_item
-  skip_after_action :empty_order_item
+  before_action :set_order, only: %i[new show edit update destroy ]
   # GET /orders or /orders.json
   def index
     @orders = Order.all
@@ -14,8 +12,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @products = Product.all 
-    @order = Order.new
-    empty_order_item
   end
 
   # GET /orders/1/edit
@@ -24,7 +20,6 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    binding.pry
     @order = Order.new(order_params)
 
     respond_to do |format|
@@ -63,8 +58,8 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
-
+      @order = params[:id] ? Order.find(params[:id]) : Order.new
+      empty_order_item
     end
 
     def empty_order_item
