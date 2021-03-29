@@ -21,7 +21,7 @@
     <%= o.label :amount %>
     <%= o.number_field :amount %>
   <% end %>
-  <%= link_to "Add a New Product", new_product_path %>
+  <%= link_to "Add a New Product", new_product_link(@order) %>
 
   <%= f.label :customer %>
   <%= f.fields_for :customer, order.build_customer do |c| %>

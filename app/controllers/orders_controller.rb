@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
-
+  after_action :empty_order_item
+  skip_after_action :empty_order_item
   # GET /orders or /orders.json
   def index
     @orders = Order.all
@@ -23,6 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
+    binding.pry
     @order = Order.new(order_params)
 
     respond_to do |format|
@@ -71,6 +73,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:sales_order_id, :purchase_order_id, customer_attributes: [:name])
+      params.require(:order).permit(:sales_order_id, :purchase_order_id, order_items_attributes: [:product_id, :amount], customer_attributes: [:name])
     end
 end
