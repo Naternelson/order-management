@@ -6,7 +6,8 @@ class Order < ApplicationRecord
     accepts_nested_attributes_for :order_items 
 
 
-    def customer_names
-        "Name " << rand(1..10).to_s
+    def customer_name=(name)
+        cust = Customer.find_or_create_by name: name
+        self.customer = cust if cust
     end
 end

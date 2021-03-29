@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @products = Product.all 
+    @order.received_on = Date.today.beginning_of_day
   end
 
   # GET /orders/1/edit
@@ -60,14 +61,19 @@ class OrdersController < ApplicationController
     def set_order
       @order = params[:id] ? Order.find(params[:id]) : Order.new
       empty_order_item
+      empty_customer
     end
 
     def empty_order_item
       @order.order_items.build if @order.order_items.empty?
     end
 
+    def empty_customer
+      @order.customer = Customer.new unless @order.customer
+    end
+
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:sales_order_id, :purchase_order_id, order_items_attributes: [:product_id, :amount], customer_attributes: [:name])
+      params.require(:order).permit(:sales_order_id, :received_on, :due_date, :customer_id, :purchase_order_id, order_items_attributes: [:product_id, :amount], customer_attributes: [:name])
     end
 end

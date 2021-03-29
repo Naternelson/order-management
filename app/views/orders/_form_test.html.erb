@@ -1,0 +1,63 @@
+
+
+<%= form_with model: order do |f|%>
+
+    <div class="form-group">
+        <%= f.label :sales_order_id, "Sales Order Number"%>
+        <%= f.text_field :sales_order_id, class: "form-control" %>
+    </div>
+
+    <strong>Customer Information</strong>
+    <%= f.label :customer_name %>
+    <%= autocomplete f, Customer.all, list: "names", class: "form-control" %>
+    <div class="form-group">
+        <%= f.label :purchase_order_id, "Customer Purchase Order Number" %>
+        <%= f.text_field :purchase_order_id, class: "form-control" %>
+    </div>
+    <hr>
+    
+    <%= f.fields_for :order_items do |o| %>
+        <strong>Product Information</strong>
+        <br><br>
+        <div class="row">
+            <div class="col">
+                <%= o.label :product_id, "Product" %>
+                <%= o.collection_select :product_id, Product.all, :id, :name, {include_blank: 'Select a Product'}, {class: "form-control"} %>
+            </div>
+            <div class="col">
+                <%= o.label :amount %>
+                <%= o.number_field :amount, class: "form-control"%>
+            </div>
+        </div>
+    <% end %>
+    
+    <br>
+    <div><strong>Dates</strong></div><br>
+    <div class="row">
+        <div class="col">
+            <%= f.label :received_on %>
+            <%= f.date_field :received_on, class: "form-control" %>
+        </div>
+
+        <div class="col">
+            <%= f.label :due_by %>
+            <%= f.date_field :due_by, class: "form-control" %>
+        </div>
+    </div>
+
+    <hr/>  
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
+
+<!--
+<form>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="First name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Last name">
+    </div>
+  </div>
+</form>
+-->

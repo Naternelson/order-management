@@ -1,4 +1,5 @@
 <%= form_with(model: order) do |f| %>
+
   <% if order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -10,25 +11,26 @@
       </ul>
     </div>
   <% end %>
-  <%= f.label :purchase_order_id, "Purchase Order Number" %>
-  <%= f.text_field :purchase_order_id %>
 
-  <%= f.label :sales_order_id, "Sales Order Number"  %>
-  <%= f.text_field :sales_order_id %>
+    <%= f.label :purchase_order_id, "Purchase Order Number"%>
+    <%= f.text_field :purchase_order_id, class: "form-control" %>
   
-  <%= f.fields_for :order_items do |o| %>
-    <%= o.collection_select :product_id, Product.all, :id, :name, include_blank: 'Select a Product'  %>
-    <%= o.label :amount %>
-    <%= o.number_field :amount %>
-  <% end %>
-  <%= link_to "Add a New Product", new_product_link(@order) %>
+    <%= f.label :sales_order_id, "Sales Order Number"  %>
+    <%= f.text_field :sales_order_id, class: "form-control" %>
 
-  <%= f.label :customer %>
-  <%= f.fields_for :customer, order.build_customer do |c| %>
-    <% c.label :name %>
-    <% c.text_field :name %>
-  <% end %>
-  <br>
+    <%= f.fields_for :order_items do |o| %>
+      <%= o.label :product_id, "Products"%>
+      <%= o.collection_select :product_id, Product.all, :id, :name, include_blank: 'Select a Product' %>
+      
+      <div class="form-floating">
+        <%= o.label :amount %>
+        <%= o.number_field :amount, class: "form-control" %>
+      </div>
+
+    <% end %>
+    <%= link_to "Add a New Product", new_product_link(order) %>
+
+    <br>
   <%= f.submit %>
 <% end %>
 
