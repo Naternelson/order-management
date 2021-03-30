@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col">
+        <p class="card-title"><%= order_item.product.name %></p>
+        <p class="card-body"> <%= order_item.product.description %> </p>
+    </div>
+    <div class="col">
+        <div>
+            <strong>Amount Ordered: </strong>
+            <span><%= "#{order_item.amount}" %> </span>
+        </div>
+    </div>
+</div>
