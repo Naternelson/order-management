@@ -1,5 +1,5 @@
 class AddUnitTypeToProducts < ActiveRecord::Migration[6.1]
   def change
-    add_column :products, :unit_type, :string
+    add_column :products, :unit_type, :string, default: "unit"
   end
 end

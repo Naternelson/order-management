@@ -1,8 +1,6 @@
-module ProductssHelper
+module ProductsHelper
 
-    def product_name(units, product)
-        pluralize(units, product.name)
-    end
+    
 
 
 end

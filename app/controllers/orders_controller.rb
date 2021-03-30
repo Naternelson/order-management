@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
+    binding.pry
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: "Order was successfully created." }
@@ -78,7 +78,7 @@ class OrdersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(
-        :sales_order_id, :received_on, :due_date, :customer_name, :purchase_order_id, order_items_attributes: [:id, :product_id, :amount]
+        :sales_order_id, :received_on, :due_by, :customer_name, :purchase_order_id, order_items_attributes: [:id, :product_id, :amount]
         )
     end
 end

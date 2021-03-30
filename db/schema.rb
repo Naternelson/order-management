@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_200421) do
     t.string "weight_unit_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "unit_type"
+    t.string "unit_type", default: "unit"
   end
 
 end

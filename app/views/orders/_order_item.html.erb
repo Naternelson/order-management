@@ -6,7 +6,13 @@
     <div class="col">
         <div>
             <strong>Amount Ordered: </strong>
-            <span><%= "#{order_item.amount}" %> </span>
+            <span><%= product_units(order_item) %> </span>
+        </div>
+        <div>
+            <strong>Amount Available: </strong>
+        </div>
+        <div>
+            <strong>Amount Remaining: </strong>
         </div>
     </div>
 </div>
