@@ -7,6 +7,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    order = Order.find_by sales_order_id: params[:order][:sales_order_id] if params[:order]
+    redirect_to order_path(order) if order
   end
 
   # GET /orders/new

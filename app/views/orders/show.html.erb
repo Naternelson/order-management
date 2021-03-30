@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+    <div class= "col-4">
+        <%= form_with model: @order, method: "get" do |f| %>
+            <%= f.collection_select :sales_order_id, Order.all, :sales_order_id, :sales_order_id, {}, {class:"form-control", onchange: "this.form.submit()"} %>
+        <% end %>
+    </div>
+</div>
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+<!--collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {})-->
