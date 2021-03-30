@@ -5,7 +5,7 @@ module OrdersHelper
     end
 
     def product_units(order_item)
-        pluralize(order_item.amount, order_item.unit_type)
+        pluralize(order_item.amount, order_item.product.unit_type)
     end
 
 

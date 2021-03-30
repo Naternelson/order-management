@@ -42,11 +42,13 @@
             <div class="row">
                 <div class="col">
                     <h5 class="text-center card-body">Product Information</h5>
+                    <% order.order_items.each do |o|%>
                     <div class="row">
                         <div class="col">
-                            Hello World
+                          <%= render partial: "order_item", locals: {order_item: o} %>  
                         </div>
                     </div>
+                    <% end %>
                 </div>
             </div>
         </div>
