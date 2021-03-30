@@ -15,12 +15,13 @@ module ApplicationHelper
             # <% end %>
 
         # The html output would be 
-            # <input list="customer_names", class="form-control", type="text", name: "order[customer_name]", id="order_customer_name">
+            # <input list="customer_names", class="form-control", type="text", name= "order[customer_name]", id="order_customer_name">
             # <datalist id="customer_names">...options...</datalist>
 
 
         html_options[:list] ||= "ids"
         method = html_options[:list].to_s.singularize.to_sym
+
         collection_name = collection.first.class.name.downcase
         html_options[:list] = "#{collection_name}_#{html_options[:list]}"
         list_name = html_options[:list].to_s.singularize.to_sym
@@ -28,6 +29,7 @@ module ApplicationHelper
         form_field = form_builder.text_field(list_name, html_options)
         options_tag_array = collection.map {|c| "<option value='#{c.send(method).to_s}'></option>"}
         options = "<datalist id = '#{html_options[:list]}'> #{options_tag_array.join(" ")} </datalist>"
+
         form_field << options.html_safe
 
     end

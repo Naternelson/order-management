@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to @order, notice: "Order was successfully updated." }
@@ -74,6 +75,8 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:sales_order_id, :received_on, :due_date, :customer_name, :purchase_order_id, order_items_attributes: [:product_id, :amount])
+      params.require(:order).permit(
+        :sales_order_id, :received_on, :due_date, :customer_name, :purchase_order_id, order_items_attributes: [:product_id, :amount]
+        )
     end
 end
