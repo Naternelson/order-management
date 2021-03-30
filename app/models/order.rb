@@ -10,4 +10,8 @@ class Order < ApplicationRecord
         cust = Customer.find_or_create_by name: name
         self.customer = cust if cust
     end
+
+    def customer_name 
+        self.customer.name if self.customer
+    end
 end
