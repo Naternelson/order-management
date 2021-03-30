@@ -7,6 +7,63 @@
         <% end %>
     </div>
 </div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class = "nav-link active" data-toggle="tab" role="tab" href="#overview-tab">overview</a>
+            </li>
+            <li class="nav-item">
+                <a class = "nav-link" data-toggle="tab" role="tab" href="#materials-tab">materials</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <br>
+    <div class="tab-content", id="order-show">
+        <div class="card-body">
+            <div class="tab-pan fade show active" id="overview-tab" role="tabpanel">
+                <%= render partial: "overview", locals: {order: @order} %>
+            </div>
+            <div class="tab-pan fade" id="materials-tab" role="tabpanel">Goodbye World</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
-<!--collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {})-->
+<!--collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {})
+
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+
+
+-->

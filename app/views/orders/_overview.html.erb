@@ -1,0 +1,72 @@
+<div class="row">
+
+    <div class="col-9">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <h5 class="text-center card-title">Customer Information</h5>
+                </div><!-- Col -->
+            </div> <!-- Row -->
+            <div class="row">
+                <div class="col">
+                    <p class="card-body text-center">
+                        <%=order.customer.name %>
+                    </p>
+                </div><!-- Col -->
+                <div class="col">
+                    <p class="card-body text-center">
+                        <%= order.purchase_order_id%>
+                    </p>
+                </div><!-- Col -->
+                <div class="col">
+                    <p class="card-body text-center">
+                        Other Information
+                    </p>
+                </div><!-- Col -->
+            </div><!-- Row -->
+        </div> <!-- Card -->
+    </div>
+
+    <div class="col-3">
+        <div class="card">
+            <h5 class="text-center card-title">Order Status</h5>
+            <p class="text-center card-body"><%= order.status %></p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-7">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <h5 class="text-center card-body">Product Information</h5>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group">
+                                <% order.products.each do |p| %>
+                                    <li class="list-group-item"><%= p.name %></li>   
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="card"><h5 class="text-center card-body">Materials and Alerts</h5></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card"><h5 class="text-center card-body">Dates and Deliveries</h5></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card"><h5 class="text-center card-body">Button Strip</h5></div>
+    </div>
+</div>
+
