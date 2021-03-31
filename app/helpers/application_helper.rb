@@ -30,7 +30,23 @@ module ApplicationHelper
         options = "<datalist id = '#{html_options[:list]}'> #{options_tag_array.join(" ")} </datalist>"
         binding.pry
         form_field << options.html_safe
+    end
 
+    def form_group(form_builder, field_type, field_name, wrapper_html_options = {}, field_html_options  = {})
+        # <div class="form_group">
+        # <%= f.label :color %>
+        # <%= f.text_field :color, class="form-control"  %>
+        # </div>
+
+        wrapper_html_options[:class] ||= "form-group"
+        field_html_options[:class] ||= "form-control"
+
+        field = form_builder.send field_type.to_sym, field_name, field_html_options
+        label = form_builder.label field_name.to_sym 
+
+        wrapper_html = ""
+        wrapper_html_options.each {|key, value| wrapper_html << "#{key.to_s}='#{value}' "}
+        "<div #{wrapper_html}> #{label} #{field}</div>".html_safe
     end
 end
 
