@@ -40,9 +40,10 @@ module ApplicationHelper
 
         wrapper_html_options[:class] ||= "form-group"
         field_html_options[:class] ||= "form-control"
+        field_name_string = field_name.to_s.split("_").collect{|w| w.capitalize}.join(" ")
 
         field = form_builder.send field_type.to_sym, field_name, field_html_options
-        label = form_builder.label field_name.to_sym 
+        label = form_builder.label field_name.to_sym, field_name_string
 
         wrapper_html = ""
         wrapper_html_options.each {|key, value| wrapper_html << "#{key.to_s}='#{value}' "}

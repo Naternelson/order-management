@@ -1,60 +1,25 @@
 <%= form_with model: product do |f| %>
     <div id="product-basic-information">
         <strong> Basic Information </strong>
-        <div class="form_group">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "form-control" %>
-        </div>
-
-        <div class="form_group">
-            <%= f.label :description %>
-            <%= f.text_field :description, class: "form-control" %>
-        </div>
+        <%= form_group f, :text_field, :name %>
+        <%= form_group f, :text_field, :description %>
+        <%= form_group f, :text_field, :unit_type %>
         <hr/>
     </div>
     <div id="product-dimensions">
         <strong> Dimensions </strong>
-
         <%= form_group f, :text_field, :color %>
-
         <div class="row">
-            <div class="col">
-                <%= form_group f, :number_field, :length %>
-            </div>
-            <div class="col">
-                <%= form_group f, :number_field, :width %>
-            </div>
-            <div class="col">
-                <%= form_group f, :number_field, :height %>
-            </div>
+            <div class="col"><%= form_group f, :number_field, :length %></div>
+            <div class="col"><%= form_group f, :number_field, :width %></div>
+            <div class="col"><%= form_group f, :number_field, :height %></div>
+            <div class="col"><%= form_group f, :text_field, :dimension_unit_type %></div>
         </div>
         <div class="row">
-            <div class="col">    
-                <%= form_group f, :dimension_unit_type %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">    
-                <%= form_group f, :dimension_unit_type %>
-            </div>
+            <div class="col"><%= form_group f, :number_field, :weight %></div>
+            <div class="col"><%= form_group f, :number_field, :weight_unit_type %></div>
         </div>
         <hr/>
     </div>
+    <div 
 <% end %>
-
-
-<!--
-    t.string "name"
-    t.string "description"
-    t.string "color"
-    t.float "length"
-    t.float "width"
-    t.float "height"
-    t.string "dimension_unit_type"
-    t.float "weight"
-    t.string "weight_unit_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "unit_type", default: "unit"
-
--->
