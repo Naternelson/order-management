@@ -32,14 +32,14 @@ module ApplicationHelper
         form_field << options.html_safe
     end
 
-    def form_group(form_builder, field_type, field_name, wrapper_html_options = {}, field_html_options  = {})
-        # <div class="form_group">
-        # <%= f.label :color %>
-        # <%= f.text_field :color, class="form-control"  %>
-        # </div>
+    def form_control_default
+        "form-control form-control-sm"
+    end
 
+    def form_group(form_builder, field_type, field_name, wrapper_html_options = {}, field_html_options  = {})
+        #meant for simple fields %w[text_field number ]
         wrapper_html_options[:class] ||= "form-group"
-        field_html_options[:class] ||= "form-control"
+        field_html_options[:class] ||= form_control_default
         field_name_string = field_name.to_s.split("_").collect{|w| w.capitalize}.join(" ")
 
         field = form_builder.send field_type.to_sym, field_name, field_html_options

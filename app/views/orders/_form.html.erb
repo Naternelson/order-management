@@ -7,7 +7,7 @@
         <br/><br/>
         <div class="form-group">
             <%= f.label :customer_name %>
-            <%= autocomplete f, "customer", Customer.all, list: "names", class: "form-control" %>
+            <%= autocomplete f, "customer", Customer.all, list: "names", class: form_control_default %>
         </div>
         <%= form_group f, :text_field, :purchase_order_id %>
         <hr/>
@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col">
                     <%= o.label :product_id, "Product" %>
-                    <%= o.collection_select :product_id, Product.all, :id, :name, {include_blank: 'Select a Product'}, {class: "form-control"} %>
+                    <%= o.collection_select :product_id, Product.all, :id, :name, {include_blank: 'Select a Product'}, {class: form_control_default} %>
                 </div>
                 <div class="col"><%= form_group o, :number_field, :amount %></div>
             </div>
