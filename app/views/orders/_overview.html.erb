@@ -54,17 +54,43 @@
         </div>
     </div>
     <div class="col-5">
-        <div class="card"><h5 class="text-center card-body">Materials and Alerts</h5></div>
+        <div class="card"><h5 class="text-center card-body">Materials and Alerts</h5><div class="text-center card-body">No alerts to show :)</div></div>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <div class="card"><h5 class="text-center card-body">Dates and Deliveries</h5></div>
+        <div class="card">
+            <h5 class="text-center card-body">Dates and Deliveries</h5>
+            <div class="row">
+                <div class="col">
+                    <div class="row card-body">
+                        <div class="col">Received On:</div>
+                        <div class="col"><%= order.received_on %></div>
+                    </div>
+                    <div class="row card-body">
+                        <div class="col">Due By:</div>
+                        <div class="col"><%= order.due_by %></div>
+                    </div>
+                    <div class="row card-body">
+                        <div class="col">Time Remaining:</div>
+                        <div class="col"><%= time_remaining(order) %></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body text-center"><em>Delivery Address</em></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <div class="card"><h5 class="text-center card-body">Button Strip</h5></div>
+        <div class="card">
+            <div class="row">
+                <div class="col text-center"><%= link_to 'Edit', edit_order_path(@order) %></div>
+                <div class="col text-center"><%= link_to 'Back', orders_path %></div>
+            </div>
+        </div>
     </div>
 </div>
 

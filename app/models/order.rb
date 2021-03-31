@@ -13,6 +13,8 @@ class Order < ApplicationRecord
     def customer_name 
         self.customer.name if self.customer
     end
+
+
 end
 
 
