@@ -19,14 +19,22 @@ class ProductsController < ApplicationController
     end
 
     def update 
-        binding.pry
-        @product = Product.find_by params[:id]
-        @product.update(product_params)
-        if @product.save
-            redirect_to product_path(@product)
+        if params[:product_material]
+            join = ProductMaterial.new(product_material_params)
+            join.product_id = params[:id]
+            join.save
+            binding.pry
+            @errors = join.errors.full_messages if join.errors
+            render :show  
         else
-            @errors = @product.errors.full_messages
-            render :edit
+            @product = Product.find_by params[:id]
+            @product.update(product_params)
+            if @product.save
+                redirect_to product_path(@product)
+            else
+                @errors = @product.errors.full_messages
+                render :edit
+            end
         end
     end
 
@@ -39,6 +47,10 @@ class ProductsController < ApplicationController
             :dimension_unit_type, :weight,
             :weight_unit_type, :unit_type
         )
+    end
+
+    def product_material_params
+        params.require(:product_material).permit(:material_id, :amount)
     end
 
     def set_product

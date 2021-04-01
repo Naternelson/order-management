@@ -49,11 +49,11 @@
         <hr/>
         <div class="row">
             <div class="col">
-            <%= form_with model: @product.product_materials.build, url: product_path(@product) do |f| %>
+            <%= form_with model: @product.product_materials.build, url: product_path(@product), method: "patch" do |f| %>
                 <div class="row">
                     <div class="col">
                         <%= f.label :material %>
-                        <%= f.collection_select :material_id, Product.all, :id, :name, {include_blank: "Select a Material"}, {class: form_control_default} %>
+                        <%= f.collection_select :material_id, @product.other_products, :id, :name, {include_blank: "Select a Material"}, {class: form_control_default} %>
                     </div>
                     <div class="col">
                         <%= f.label :amount, "Amount Per Product Unit" %>
@@ -76,3 +76,5 @@
         </div>
     </div>
 </div>
+
+<% console %>
