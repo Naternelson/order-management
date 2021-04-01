@@ -10,7 +10,8 @@ class Product < ApplicationRecord
     has_many :material_products, class_name: "ProductMaterial", foreign_key: :material_id
     has_many :products, through: :material_products
 
-    def other_products
-        Product.where.not(id: self.id)
+    def available_materials
+        taken_ids = self.material_ids << self.id
+        Product.where.not(id: taken_ids)
     end
 end

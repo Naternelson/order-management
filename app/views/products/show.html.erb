@@ -49,11 +49,11 @@
         <hr/>
         <div class="row">
             <div class="col">
-            <%= form_with model: @product.product_materials.build, url: product_path(@product), method: "patch" do |f| %>
+            <%= form_with model: @blank_product_material, url: product_path(@product), method: "patch" do |f| %>
                 <div class="row">
                     <div class="col">
                         <%= f.label :material %>
-                        <%= f.collection_select :material_id, @product.other_products, :id, :name, {include_blank: "Select a Material"}, {class: form_control_default} %>
+                        <%= f.collection_select :material_id, @product.available_materials, :id, :name, {include_blank: "Select a Material"}, {class: form_control_default} %>
                     </div>
                     <div class="col">
                         <%= f.label :amount, "Amount Per Product Unit" %>
@@ -66,7 +66,32 @@
             <% end %>
             </div>
         </div>
-        
+        <table id ="materials-table" class="table table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Material Name</th>
+                    <th scope="col">Material ID</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">In Stock</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @current_materials.each do |m| %>
+                    <tr>
+                        <td></td>
+                        <td><%= m.material.name %></td>
+                        <td><%= m.material.id %></td>
+                        <td><%= m.amount %></td>
+                        <td>0</td>
+                        <td><%= link_to 'Delete', m, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+
+
+        </table>
     </div>
 
     <div id = "button strip">

@@ -18,13 +18,19 @@ class ProductsController < ApplicationController
         end
     end
 
+    def show 
+        @blank_product_material = @product.product_materials.build
+        @current_materials = @product.product_materials.select {|m| !m.id.nil?} 
+    end
+
     def update 
         if params[:product_material]
             join = ProductMaterial.new(product_material_params)
             join.product_id = params[:id]
             join.save
-            binding.pry
             @errors = join.errors.full_messages if join.errors
+            @blank_product_material = @product.product_materials.build
+            @current_materials = @product.product_materials.select {|m| !m.id.nil?} 
             render :show  
         else
             @product = Product.find_by params[:id]
