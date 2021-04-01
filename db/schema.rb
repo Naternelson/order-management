@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_172622) do
+ActiveRecord::Schema.define(version: 2021_04_01_185556) do
 
   create_table "aisles", force: :cascade do |t|
     t.string "alias"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_172622) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cases", force: :cascade do |t|
+  create_table "boxes", force: :cascade do |t|
     t.integer "batch_id"
     t.integer "max_size"
     t.integer "min_size"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_172622) do
     t.string "alias"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
   end
 
   create_table "columns", force: :cascade do |t|

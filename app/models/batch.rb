@@ -1,4 +1,4 @@
 class Batch < ApplicationRecord
     belongs_to :product 
-    has_many :cases 
+    has_many :boxes 
 end
