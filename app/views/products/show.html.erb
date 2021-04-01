@@ -10,5 +10,12 @@
         <%= full_dimensions(@product)%>
 
     </div>
+
+    <div id = "button strip">
+        <div class="row">
+            <div class="col text-center"><%= link_to 'Edit', edit_product_path(@product) %></div>
+            <div class="col text-center"><%= link_to 'Back', products_path %></div>
+        </div>
+    </div>
 </div>
 <% console %>

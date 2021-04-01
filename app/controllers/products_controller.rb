@@ -18,6 +18,17 @@ class ProductsController < ApplicationController
         end
     end
 
+    def update 
+        @product = Product.find_by params[:id]
+        @product.update(product_params)
+        if @product.save
+            redirect_to product_path(@product)
+        else
+            @errors = @product.errors.full_messages
+            render :edit
+        end
+    end
+
     private
 
     def product_params
