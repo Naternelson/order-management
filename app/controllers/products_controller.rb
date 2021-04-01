@@ -44,6 +44,13 @@ class ProductsController < ApplicationController
         end
     end
 
+    def destroy
+        @product.product_materials.each {|m| m.destroy}
+        @product.material_products.each {|m| m.destroy}
+        @product.destroy
+        redirect_to products_path
+    end
+
     private
 
     def product_params
