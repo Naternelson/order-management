@@ -10,7 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_200421) do
+ActiveRecord::Schema.define(version: 2021_04_01_164645) do
+
+  create_table "ailses", force: :cascade do |t|
+    t.string "alias"
+    t.string "name"
+    t.integer "zone_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.string "alias"
+    t.string "batch_name"
+    t.integer "product_id"
+    t.datetime "mfg_date"
+    t.datetime "exp_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "bays", force: :cascade do |t|
+    t.string "alias"
+    t.string "name"
+    t.integer "column_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cases", force: :cascade do |t|
+    t.integer "batch_id"
+    t.integer "max_size"
+    t.integer "min_size"
+    t.string "status"
+    t.integer "amount"
+    t.integer "bay_id"
+    t.string "alias"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "columns", force: :cascade do |t|
+    t.string "alias"
+    t.string "name"
+    t.integer "aisle_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -61,6 +107,27 @@ ActiveRecord::Schema.define(version: 2021_03_30_200421) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "unit_type", default: "unit"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name"
+    t.string "address_line_1"
+    t.string "address_line_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "type"
+    t.string "alias"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "zones", force: :cascade do |t|
+    t.string "name"
+    t.string "alias"
+    t.integer "site_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

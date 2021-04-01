@@ -1,0 +1,2 @@
+class Bay < ApplicationRecord
+end
