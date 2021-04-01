@@ -6,9 +6,67 @@
         <br>
         <hr>
     </div>
-    <div id="dimensions">
-        <%= full_dimensions(@product)%>
-
+    <div class="row">
+        <div id="dimensions" class="col">
+            <div class="row">
+                <div class="col text-right"><strong>Dimensions: </strong></div>
+                <div class="col"><%= full_dimensions(@product)%></div>
+            </div>
+            <div class="row">
+                <div class="col text-right"><strong>Weight: </strong></div>
+                <div class="col"><%= @product.weight %></div>
+            </div>
+            <div class="row">
+                <div class="col text-right"><strong>Color: </strong></div>
+                <div class="col"><%= @product.color %></div>
+            </div>
+        </div>
+        <div id="aggragete" class="col">
+            <div class="row">
+                <div class="col text-right"><strong>Product on hand: </strong></div>
+            </div>
+            <div class="row">
+                <div class="col text-right"><strong>Products scheduled for build: </strong></div>
+            </div>
+            <div class="row">
+                <div class="col text-right"><strong>Enough Materials to make :</strong></div>
+            </div>
+            <div class="row">
+                <div class="col text-right"><strong>Total Product Available: </strong></div>
+            </div>
+        </div>
+        <div id="product_orders" class="col">
+            <div class="row">
+                <div class="col"><strong>Associated Open Orders</strong></div>
+            </div>
+        </div>
+    </div>
+    <div id="associated materials">
+        <hr/><hr/>
+        <div class="row">
+            <div class="col text-center"><h3>Product Materials</h3></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col">
+            <%= form_with model: @product.product_materials.build, url: product_path(@product) do |f| %>
+                <div class="row">
+                    <div class="col">
+                        <%= f.label :material %>
+                        <%= f.collection_select :material_id, Product.all, :id, :name, {include_blank: "Select a Material"}, {class: form_control_default} %>
+                    </div>
+                    <div class="col">
+                        <%= f.label :amount, "Amount Per Product Unit" %>
+                        <%= f.number_field :amount, class: form_control_default %>
+                    </div>
+                </div>
+                <div class="row">
+                    <%= f.submit "Add Material to Product", class:"btn btn-sm form-control"%>
+                </div>  
+            <% end %>
+            </div>
+        </div>
+        
     </div>
 
     <div id = "button strip">
@@ -18,4 +76,3 @@
         </div>
     </div>
 </div>
-<% console %>

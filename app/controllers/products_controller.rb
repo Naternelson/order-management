@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     end
 
     def update 
+        binding.pry
         @product = Product.find_by params[:id]
         @product.update(product_params)
         if @product.save
