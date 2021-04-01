@@ -1,2 +1,0 @@
-class Ailse < ApplicationRecord
-end

@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_164645) do
+ActiveRecord::Schema.define(version: 2021_04_01_172622) do
 
-  create_table "ailses", force: :cascade do |t|
+  create_table "aisles", force: :cascade do |t|
     t.string "alias"
     t.string "name"
     t.integer "zone_id"
