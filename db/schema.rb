@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_185556) do
+ActiveRecord::Schema.define(version: 2021_04_01_191226) do
 
   create_table "aisles", force: :cascade do |t|
     t.string "alias"
@@ -85,6 +85,21 @@ ActiveRecord::Schema.define(version: 2021_04_01_185556) do
     t.integer "customer_id"
   end
 
+  create_table "organization_users", force: :cascade do |t|
+    t.integer "organization_id"
+    t.integer "user_id"
+    t.string "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "product_materials", force: :cascade do |t|
     t.integer "product_id"
     t.integer "material_id"
@@ -119,6 +134,18 @@ ActiveRecord::Schema.define(version: 2021_04_01_185556) do
     t.string "zip"
     t.string "type"
     t.string "alias"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "organization_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "preferred_name"
+    t.date "birthdate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
