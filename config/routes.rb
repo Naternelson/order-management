@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   
-  root "application#root"
+  root to: "dashboard#index"
   get '/login', to: 'session#new'
   post 'login', to: 'session#create'
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   post '/logout', to: 'session#destroy'
   get '/auth/:provider/callback' => 'session#omniauth'
+  
+  resources :users, only: %i[create edit show update destroy]
+
   namespace :organization, path: '/:org_slug' do 
     resources :orders
     # resources :orders do
