@@ -1,0 +1,20 @@
+<%= form_with model: organization, url: user_organizations_path(current_user) do |f| %>
+    <div id = "Organization Details">
+        <strong>Organization Details</strong>
+        <br/><br/>
+        <%= form_group(f, :text_field, :name) %>
+        <div class="form-group">
+            <%= f.label :type %>
+            <%= f.select :type, ["Personal", "Business"],{}, {class: form_control_default} %>
+        </div>
+        <hr/>
+    </div>
+    <div id="location">
+        <strong>Address</strong>
+        <br/><br/>
+        
+    
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

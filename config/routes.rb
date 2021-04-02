@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   post '/logout', to: 'session#destroy'
   get '/auth/:provider/callback' => 'session#omniauth'
-  
-  resources :users, only: %i[create edit show update destroy]
+
+  resources :users, only: %i[create edit show update destroy] do 
+    resources :organizations, only: [:new, :create]
+  end
 
   namespace :organization, path: '/:org_slug' do 
     resources :orders
