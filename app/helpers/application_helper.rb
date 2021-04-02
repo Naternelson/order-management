@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+    def google_button(text = "") 
+        open_a= "<a href='/auth/google_oauth2' class='btn btn-lg btn-google btn-outline-dark' data-method='post' rel='nofollow'>".html_safe
+        image = image_tag('https://img.icons8.com/color/16/000000/google-logo.png', class: "p-2")
+        link = open_a << image << text.html_safe << "</a>".html_safe
+    end
+
     def autocomplete(form_builder, collection_name, collection = [],  html_options = {})
         # This method will autogenerate a datalist input field for a form builder
         # Requirements:
