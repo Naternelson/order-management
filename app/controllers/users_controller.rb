@@ -1,11 +1,27 @@
 class UsersController < ApplicationController
+    before_action :set_user
+    layout 'general'
     def new 
-        render layout: "general"
+    end
+
+    def create 
+        @user = User.new user_params 
+        binding.pry
+        if @user.save
+            redirect_to :root
+        else
+            @errors = @user.errors.full_messages
+            render :new 
+        end
     end
 
     private 
 
     def set_user
         @user = params[:id] ? User.find_by( id: params[:id] ): User.new
+    end
+
+    def user_params
+        params.require(:user).permit(:first_name, :last_name, :birthdate, :preferred_name, :email, :password, :password_confirmation)
     end
 end
