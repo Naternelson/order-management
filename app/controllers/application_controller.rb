@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
     end
 
 
+
     private
+
+    def current_user 
+        @user = User.find_by id: session[:user_id]
+    end
+
 
     def choose_layout
         if current_user.admin?

@@ -1,1 +1,33 @@
-<h1>Login</h1>
+<div class="row mt-4">
+    <div class="col-4">
+        <div class="login-main-text">
+            <h2>Login Page</h2>
+            <p>Login from here to access.</p>
+        </div>
+    </div>
+    <div class="main col-md-6 col-sm-12">
+        <div class="login-form">
+            <%= form_with url: login_path, method: :post do |f|%>
+                <%= form_group f, :text_field, :email %>
+                <%= form_group f, :password_field, :password %>
+                <%= f.submit "Login", class: form_control_default %>                
+            <% end %>
+            <hr>
+            <div class="row"><div class="col text-center">OR</div></div>
+            <hr><hr>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <%= google_button "Login" %>
+                    <%= link_to "Signup", signup_path, class: "btn p-2 ml-2 bg-secondary text-white" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% if @errors %>
+    <div class="row">
+        <% @errors.each do |e| %>
+            <div class="col d-flex justify-content-center"><h4 class="text-danger m-4"><%= e %></h4></div>
+        <% end %>
+    </div> 
+<% end %>
