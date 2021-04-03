@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_234230) do
+ActiveRecord::Schema.define(version: 2021_04_03_171414) do
 
   create_table "aisles", force: :cascade do |t|
     t.string "alias"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_234230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "customer_id"
+    t.integer "organization_id"
   end
 
   create_table "organization_users", force: :cascade do |t|
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_234230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "unit_type", default: "unit"
+    t.integer "organization_id"
   end
 
   create_table "sites", force: :cascade do |t|
