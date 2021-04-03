@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Organization::OrdersController < ApplicationController
   before_action :set_order, only: %i[new show edit update destroy ]
   # GET /orders or /orders.json
   def index

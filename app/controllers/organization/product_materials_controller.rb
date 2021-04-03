@@ -1,4 +1,4 @@
-class ProductMaterialsController < ApplicationController
+class Organization::ProductMaterialsController < ApplicationController
     def destroy
         @product_material = ProductMaterial.find_by id: params[:id]
         @product = @product_material.product 

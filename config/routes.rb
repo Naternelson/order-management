@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :organization, path: '/:org_slug' do 
+    root to: "dashboard#index"
     resources :orders
     # resources :orders do
     #   resources :products, only: [:new]
