@@ -1,4 +1,4 @@
-<%= form_with model: product do |f| %>
+<%= form_with model: product, url: organization_products_path(current_org) do |f| %>
     <div id="product-basic-information">
         <strong> Basic Information </strong>
         <%= form_group f, :text_field, :name %>

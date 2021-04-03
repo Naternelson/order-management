@@ -14,6 +14,11 @@ class Product < ApplicationRecord
 
     def available_materials
         taken_ids = self.material_ids << self.id
-        Product.where.not(id: taken_ids)
+        binding.pry
+        self.class.for(self.organization).where.not(id: taken_ids)
+    end
+
+    def self.for(organization) 
+        self.where('organization_id = ?', organization.id)
     end
 end

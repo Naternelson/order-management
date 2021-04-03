@@ -3,6 +3,6 @@ class Organization::ProductMaterialsController < ApplicationController
         @product_material = ProductMaterial.find_by id: params[:id]
         @product = @product_material.product 
         @product_material.destroy
-        redirect_to product_path @product
+        redirect_to organization_product_path current_org, @product
     end
 end

@@ -1,8 +1,10 @@
 class Organization::ProductsController < ApplicationController
+    before_action :redirect_if_logged_out
+    before_action :redirect_if_outsider
     before_action :set_product, only: %i[new show edit update destroy ]
 
     def index 
-        @products = Product.all
+        @products = Product.for current_org
     end
 
     def new
@@ -10,8 +12,9 @@ class Organization::ProductsController < ApplicationController
 
     def create
         @product = Product.new product_params
+        @product.organization = current_org
         if @product.save 
-            redirect_to product_path(@product)
+            redirect_to organization_product_path(current_org, @product)
         else
             @errors = @product.errors.full_messages
             render :new
@@ -19,6 +22,7 @@ class Organization::ProductsController < ApplicationController
     end
 
     def show 
+        return redirect_to organization_products_path(current_org) if @product.nil?
         @blank_product_material = @product.product_materials.build
         @current_materials = @product.product_materials.select {|m| !m.id.nil?} 
     end
@@ -36,7 +40,7 @@ class Organization::ProductsController < ApplicationController
             @product = Product.find_by params[:id]
             @product.update(product_params)
             if @product.save
-                redirect_to product_path(@product)
+                redirect_to organization_product_path(current_org, @product)
             else
                 @errors = @product.errors.full_messages
                 render :edit
@@ -48,7 +52,7 @@ class Organization::ProductsController < ApplicationController
         @product.product_materials.each {|m| m.destroy}
         @product.material_products.each {|m| m.destroy}
         @product.destroy
-        redirect_to products_path
+        redirect_to organization_products_path(current_org)
     end
 
     private
@@ -67,6 +71,6 @@ class Organization::ProductsController < ApplicationController
     end
 
     def set_product
-        @product = params[:id] ? Product.find(params[:id]) : Product.new
+        @product = params[:id] ? Product.find_by_id(params[:id]) : Product.new
     end
 end

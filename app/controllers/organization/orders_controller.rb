@@ -1,44 +1,36 @@
 class Organization::OrdersController < ApplicationController
+  before_action :redirect_if_logged_out, :redirect_if_outsider
   before_action :set_order, only: %i[new show edit update destroy ]
-  # GET /orders or /orders.json
+
   def index
-    @orders = Order.all
+    @orders = Order.for current_org
   end
 
-  # GET /orders/1 or /orders/1.json
   def show
     order = Order.find_by sales_order_id: params[:order][:sales_order_id] if params[:order]
     redirect_to order_path(order) if order
   end
 
-  # GET /orders/new
   def new
     @products = Product.all 
     @order.received_on = Date.today.beginning_of_day
   end
 
-  # GET /orders/1/edit
   def edit
   end
 
-  # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-    binding.pry
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    @order.organization = current_org
+    if @order.save
+      redirect_to organization_products_path(current_org)
+    else
+      flash[:errors] = @order.errors.full_messages
+      render :new
     end
   end
 
-  # PATCH/PUT /orders/1 or /orders/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to @order, notice: "Order was successfully updated." }
@@ -50,7 +42,6 @@ class Organization::OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1 or /orders/1.json
   def destroy
     @order.destroy
     respond_to do |format|
@@ -60,7 +51,6 @@ class Organization::OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = params[:id] ? Order.find(params[:id]) : Order.new
       empty_order_item
@@ -75,7 +65,6 @@ class Organization::OrdersController < ApplicationController
       @order.customer = Customer.new unless @order.customer
     end
 
-    # Only allow a list of trusted parameters through.
     def order_params
       params.require(:order).permit(
         :sales_order_id, :received_on, :due_by, :customer_name, :purchase_order_id, order_items_attributes: [:id, :product_id, :amount]

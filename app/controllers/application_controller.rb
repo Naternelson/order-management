@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     
-    helper_method :current_user, :current_org, :related_user?, :is_admin?
+    helper_method :current_user, :current_org
 
 
     def current_user 
@@ -31,6 +31,14 @@ class ApplicationController < ActionController::Base
     def is_admin?
         user_relationship = current_org.organization_users.find {|r| r.user == current_user}
         user_relationship.role == "admin" if user_relationship
+    end
+
+    def redirect_if_logged_out
+        redirect_to root_path if logged_out?
+    end
+
+    def redirect_if_outsider
+        redirect_to root_path unless related_user?
     end
     
 end

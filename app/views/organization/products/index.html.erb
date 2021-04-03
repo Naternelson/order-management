@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1 class="text-center">Products</h1>
   <div class="row">
-    <div class="col d-flex justify-content-center"><%= link_to "New Product", new_product_path%></div>
+    <div class="col d-flex justify-content-center"><%= link_to "New Product", new_organization_product_path%></div>
     <div class="col d-flex justify-content-center"><%= link_to "Home" %></div>
   </div>
   <br>
@@ -30,9 +30,9 @@
         <td><%= product.name %></td>
         <td><%= product.description %></td>
         <td></td>
-        <td><%= link_to 'Open', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Open', organization_product_path(current_org, product) %></td>
+        <td><%= link_to 'Edit', edit_organization_product_path(current_org, product) %></td>
+        <td><%= link_to 'Delete', organization_product_path(current_org, product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

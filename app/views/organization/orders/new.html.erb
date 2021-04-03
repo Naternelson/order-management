@@ -3,4 +3,4 @@
     <h1 class="text-center">New Order</h1>
     <%= render 'form', order: @order %>
 </div>
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Back', organization_orders_path(current_org) %>
