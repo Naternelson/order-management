@@ -15,8 +15,11 @@
   <%= render partial: "sidebar" %>
 
   <div id="main">
-    <div class="container">
-      <%= yield %>
+    <div class="row">
+      <div class="col-md-2 hidden-lg-up"></div>
+      <div class="col">
+        <%= yield %>
+      </div>
     </div>
   </div>
   </body>

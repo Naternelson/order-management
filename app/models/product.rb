@@ -14,7 +14,6 @@ class Product < ApplicationRecord
 
     def available_materials
         taken_ids = self.material_ids << self.id
-        binding.pry
         self.class.for(self.organization).where.not(id: taken_ids)
     end
 
