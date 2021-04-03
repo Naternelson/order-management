@@ -25,11 +25,12 @@ module ApplicationHelper
             # <datalist id="customer_names">...options...</datalist>
 
         html_options[:list] ||= "ids"
+        method = html_options[:list].to_s.singularize.to_sym
         html_options[:list] = "#{collection_name}_#{html_options[:list]}"
         list_name = html_options[:list].to_s.singularize.to_sym
 
         form_field = form_builder.text_field(list_name, html_options)
-        options_tag_array = collection.map {|c| "<option value='#{c.send(list_name).to_s}'></option>"}
+        options_tag_array = collection.map {|c| "<option value='#{c.send(method).to_s}'></option>"}
         options = "<datalist id = '#{html_options[:list]}'> #{options_tag_array.join(" ")} </datalist>"
 
         form_field << options.html_safe
