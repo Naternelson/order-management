@@ -23,5 +23,9 @@ module OrdersHelper
             end
         end
     end
+
+    def form_url(order)
+        order.id ? organization_order_path(current_org, order) : organization_orders_path(current_org)
+    end
     
 end

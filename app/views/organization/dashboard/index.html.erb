@@ -1,1 +1,22 @@
-<h1>Hello World</h1>
+<h1>Admin Page</h1>
+<hr>
+<h3>Add User to Organization</h3>
+<%= form_with model: current_org.organization_users.build, url: organization_dashboard_index_path do |f| %>
+    <%= form_group(f, :text_field, :email) %>
+    <%= f.submit "Add User", class: "btn" %>
+<% end %>
+<hr><hr>
+<%if !@users.empty? %>
+    <h3>All User</h3>
+    <ul class="list-group">
+    <% @users.each do |e| %>
+        <li class="list-group-item">
+            <strong><%= e.user.name %></strong> - 
+            <em><%= e.role %></em>
+        </li>
+    <% end %>
+    </ul>
+<%else%>
+    <br>
+        <h5>-No Other Employees Added-</h5>
+<% end %>

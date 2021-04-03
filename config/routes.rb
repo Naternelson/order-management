@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   root to: "dashboard#index"
+  get '/rails/info/routes', as: "routes"
   get '/login', to: 'session#new'
   post 'login', to: 'session#create'
   get '/signup', to: 'users#new'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
 
   namespace :organization, path: '/:org_slug' do 
     root to: "dashboard#index"
+    resources :dashboard, only: [:create, :destroy]
     resources :orders do
       resources :products, only: [:new]
     end

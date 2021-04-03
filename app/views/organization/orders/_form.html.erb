@@ -1,4 +1,4 @@
-<%= form_with model: order, url: organization_orders_path(current_org) do |f|%>
+<%= form_with model: order, url: form_url(order) do |f|%>
     <%= form_group f, :text_field, :sales_order_id %>
     <hr/>
 

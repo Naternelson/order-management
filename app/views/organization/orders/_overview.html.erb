@@ -87,8 +87,8 @@
     <div class="col">
         <div class="card">
             <div class="row">
-                <div class="col text-center"><%= link_to 'Edit', edit_order_path(@order) %></div>
-                <div class="col text-center"><%= link_to 'Back', orders_path %></div>
+                <div class="col text-center"><%= link_to 'Edit', edit_organization_order_path(current_org, @order) %></div>
+                <div class="col text-center"><%= link_to 'Back', organization_orders_path(current_org) %></div>
             </div>
         </div>
     </div>

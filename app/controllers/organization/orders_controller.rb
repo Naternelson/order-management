@@ -12,7 +12,7 @@ class Organization::OrdersController < ApplicationController
   end
 
   def new
-    @products = Product.all 
+    @products = Product.for current_org
     @order.received_on = Date.today.beginning_of_day
   end
 
@@ -31,14 +31,11 @@ class Organization::OrdersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.update(order_params)
+      redirect_to organization_order_path(current_org, @order)
+    else
+      flash[:errors] = @order.errors.full_messages
+      render :edit 
     end
   end
 

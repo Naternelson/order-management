@@ -1,0 +1,8 @@
+<% if flash[:errors] %>
+    <h5>Errors:</h5>
+    <%  flash[:errors].each do |e| %>
+        <div class="d-flex flex-row justify-content-right">
+            <span class="text-danger"><%= e %></span>
+        </div>
+    <% end %>
+<% end %>   

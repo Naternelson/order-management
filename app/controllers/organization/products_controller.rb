@@ -16,7 +16,7 @@ class Organization::ProductsController < ApplicationController
         if @product.save 
             redirect_to organization_product_path(current_org, @product)
         else
-            @errors = @product.errors.full_messages
+            flash[:errors] = @product.errors.full_messages
             render :new
         end
     end

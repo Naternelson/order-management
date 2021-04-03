@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class= "col-4">
-        <%= form_with model: @order, method: "get" do |f| %>
+        <%= form_with model: @order, url: organization_order_path(current_org, @order),method: "get" do |f| %>
             <%= f.collection_select :sales_order_id, Order.all, :sales_order_id, :sales_order_id, {}, {class:"form-control", onchange: "this.form.submit()"} %>
         <% end %>
     </div>
@@ -31,38 +31,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-<!--collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {})
-
-<div class="card text-center">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
-
-
--->
