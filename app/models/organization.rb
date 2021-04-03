@@ -2,6 +2,8 @@ class Organization < ApplicationRecord
     has_many :organization_users
     has_many :users, through: :organization_users
     has_many :sites 
+    has_many :products
+    has_many :orders
     accepts_nested_attributes_for :sites
     validates :name, presence: true, uniqueness: true
     validates :org_type, inclusion: { in: %w(Personal Business), message: "%{value} is not a valid role" }

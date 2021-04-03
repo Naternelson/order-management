@@ -2,6 +2,7 @@ class Order < ApplicationRecord
     has_many :order_items
     has_many :products, through: :order_items
     belongs_to :customer
+    belongs_to :organization
     accepts_nested_attributes_for :order_items 
  
 
