@@ -1,18 +1,19 @@
 <h1>Admin Page</h1>
 <hr>
-<h3>Add User to Organization</h3>
+<h3>Add User to <%= current_org.name%></h3>
 <%= form_with model: current_org.organization_users.build, url: organization_dashboard_index_path do |f| %>
     <%= form_group(f, :text_field, :email) %>
     <%= f.submit "Add User", class: "btn" %>
 <% end %>
 <hr><hr>
 <%if !@users.empty? %>
-    <h3>All User</h3>
+    <h3>All Users</h3>
     <ul class="list-group">
     <% @users.each do |e| %>
         <li class="list-group-item">
             <strong><%= e.user.name %></strong> - 
             <em><%= e.role %></em>
+            <%= link_to 'Delete', organization_dashboard_path(current_org, e), method: :delete, data: { confirm: 'Are you sure?' } %>
         </li>
     <% end %>
     </ul>

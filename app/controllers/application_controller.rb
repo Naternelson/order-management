@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     
-    helper_method :current_user, :current_org
+    helper_method :current_user, :current_org, :is_admin?
 
 
     def current_user 

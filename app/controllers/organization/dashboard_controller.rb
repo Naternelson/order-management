@@ -1,5 +1,8 @@
 class Organization::DashboardController < ApplicationController
-    before_action :redirect_if_not_admin
+    before_action :redirect_if_logged_out
+    before_action :redirect_if_outsider, only: [:index, :create, :destroy]
+    before_action :redirect_if_not_admin, only: :index
+
     def index 
         set_users
     end
@@ -16,6 +19,16 @@ class Organization::DashboardController < ApplicationController
         redirect_to organization_root_path current_org
     end
 
+    def destroy 
+        org_user = OrganizationUser.find_by_id params[:id]
+        if org_user && org_user.organization == current_org
+            org_user.destroy
+        else
+            flash[:errors] = ["Couldn't find Organization's User"]
+        end
+        redirect_to organization_root_path current_org
+    end
+
     private 
 
     def redirect_if_not_admin
@@ -24,5 +37,12 @@ class Organization::DashboardController < ApplicationController
 
     def set_users 
         @users = current_org.organization_users.select {|u| u.user_id != current_user.id}
+    end
+
+    def check_path
+        if params[:org_slug] = "logout"
+            binding.pry
+            redirect_to "/logout"
+        end
     end
 end

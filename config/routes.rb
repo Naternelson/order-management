@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   namespace :organization, path: '/:org_slug' do 
     root to: "dashboard#index"
+    post "/logout", to: "session#destroy"
     resources :dashboard, only: [:create, :destroy]
     resources :orders do
       resources :products, only: [:new]

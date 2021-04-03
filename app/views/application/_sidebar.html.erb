@@ -1,6 +1,8 @@
 <div class="sidenav">
-    <%= link_to "Dashboard", organization_root_path(current_org) %>
+    <%= link_to("Dashboard", organization_root_path(current_org)) if is_admin? %>
     <%= link_to "Orders", organization_orders_path(current_org) %>
     <%= link_to "Products", organization_products_path(current_org) %>
+    <%= link_to "My Page", root_path %>
+    <%= link_to "Logout", logout_route, method: :post %>
     <%= render "error_messages"%>  
 </div>
