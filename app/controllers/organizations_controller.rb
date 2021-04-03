@@ -8,7 +8,6 @@ class OrganizationsController < ApplicationController
         @organization = Organization.new organization_params
         if @organization.save
             foo = @organization.organization_users.create(user: current_user, role: "admin")
-            binding.pry
             redirect_to root_path
         else
             flash[:errors] = @organization.errors.full_messages

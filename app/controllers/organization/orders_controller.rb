@@ -4,6 +4,7 @@ class Organization::OrdersController < ApplicationController
 
   def index
     @orders = Order.for current_org
+    @orders = @orders.select {|o| o.sales_order_id.match("(#{params[:order_num]})")} if params[:order_num]
   end
 
   def show
@@ -23,7 +24,7 @@ class Organization::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.organization = current_org
     if @order.save
-      redirect_to organization_products_path(current_org)
+      redirect_to organization_orders_path(current_org)
     else
       flash[:errors] = @order.errors.full_messages
       render :new
@@ -41,10 +42,6 @@ class Organization::OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private

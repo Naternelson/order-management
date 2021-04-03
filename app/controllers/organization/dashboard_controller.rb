@@ -40,8 +40,7 @@ class Organization::DashboardController < ApplicationController
     end
 
     def check_path
-        if params[:org_slug] = "logout"
-            binding.pry
+        if params[:org_slug] = "logou"
             redirect_to "/logout"
         end
     end
