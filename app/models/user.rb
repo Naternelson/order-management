@@ -17,7 +17,11 @@ class User < ApplicationRecord
     end
 
     def name 
-      self.preferred_name ||= self.first_name
+      if self.preferred_name.empty?
+        self.first_name
+      else 
+        self.preferred_name
+      end
     end
 
     def full_name 
