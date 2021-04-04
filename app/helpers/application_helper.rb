@@ -55,5 +55,33 @@ module ApplicationHelper
         wrapper_html_options.each {|key, value| wrapper_html << "#{key.to_s}='#{value}' "}
         "<div #{wrapper_html}> #{label} #{field}</div>".html_safe
     end
+
+    def form_all(model, options_hash={})
+        columns = model.class.column_names - ["id", "created_at", "updated_at"]
+        columns = options_hash[:only] if options_hash[:only]
+        columns = columns - options_hash[:except] if options_hash[:except]
+        form_hash = {model: model}
+        form_hash[:url] = options_hash[:url] if options_hash[:url]
+
+        form_with(form_hash) do |f|
+            input_controls = columns.map do |c|
+
+                col_type = model.class.columns.find{|col| col.name == c}.type
+                if col_type == :integer || col_type == :float || col_type == :decimal
+                    field_type = :number_field
+                elsif col_type == :datetime || col_type == :date 
+                    field_type = :date_field 
+                else
+                    field_type = :text_field 
+                end
+                form_group f, field_type, c
+
+            end
+            yield_block = yield(f) if block_given?
+            button = f.submit(class: form_control_default << "btn btn-primary") unless options_hash[:no_button]
+            id_field = form_group(f, :number_field, "id", {}, readonly: true) if Rails.env == "development"
+            (input_controls << yield_block << id_field << button).join("").html_safe
+        end
+    end
 end
 
