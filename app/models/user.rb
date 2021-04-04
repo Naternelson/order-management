@@ -17,7 +17,7 @@ class User < ApplicationRecord
     end
 
     def name 
-      if self.preferred_name.empty?
+      if self.preferred_name.nil? || self.preferred_name.empty?
         self.first_name
       else 
         self.preferred_name

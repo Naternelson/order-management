@@ -15,7 +15,7 @@ module OrdersHelper
             days_remaining =  (due_date - DateTime.now) / 86400
             if days_remaining > 1 
                 "#{pluralize(days_remaining.to_i, "Day")} Remaining"
-            elsif days_remaining.between(0,1)
+            elsif days_remaining.between?(0,1)
                 "#{pluralize(days_remaining.to_i * 24, "Hour")} Remaining"
             else
                 overdue = days_remaining < -1 ? pluralize(days_remaining.to_i * -1, "Day") : pluralize(days_remaining.to_i * -24, "Hour")
