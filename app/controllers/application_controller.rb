@@ -34,10 +34,12 @@ class ApplicationController < ActionController::Base
     end
 
     def redirect_if_logged_out
+        flash[:errors] = ["Please Log In"] if logged_out?
         redirect_to root_path if logged_out?
     end
 
     def redirect_if_outsider
+        flash[:errors] = ["No access permitted."] if related_user?
         redirect_to root_path unless related_user?
     end
     

@@ -10,10 +10,10 @@ class SessionController < ApplicationController
             session[:user_id] = @user.id
             redirect_to :root
         elsif @user 
-            @errors = ["Incorrect Password"]
+            flash[:errors] = ["Incorrect Password"]
             render :new
         else
-            @errors = ["Email '#{params[:email]}' not found"]
+            flash[:errors] = ["Email '#{params[:email]}' not found"]
             render :new
         end
     end

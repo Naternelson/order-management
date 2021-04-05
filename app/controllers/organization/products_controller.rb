@@ -32,7 +32,7 @@ class Organization::ProductsController < ApplicationController
             join = ProductMaterial.new(product_material_params)
             join.product_id = params[:id]
             join.save
-            @errors = join.errors.full_messages if join.errors
+            flash[:errors] = join.errors.full_messages if join.errors
             @blank_product_material = @product.product_materials.build
             @current_materials = @product.product_materials.select {|m| !m.id.nil?} 
             render :show  
@@ -42,7 +42,7 @@ class Organization::ProductsController < ApplicationController
             if @product.save
                 redirect_to organization_product_path(current_org, @product)
             else
-                @errors = @product.errors.full_messages
+                flash[:errors] = @product.errors.full_messages
                 render :edit
             end
         end
