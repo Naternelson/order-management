@@ -3,8 +3,10 @@ class Organization::OrdersController < ApplicationController
   before_action :set_order, only: %i[new show edit update destroy ]
 
   def index
-    @orders = Order.for current_org
-    @orders = @orders.select {|o| o.sales_order_id.match("(#{params[:order_num]})")} if params[:order_num]
+    @orders =  params[:order_num] ? Order.for(current_org).search_sales(params[:order_num]) : Order.for(current_org)
+    binding.pry
+    # @orders = Order.for current_org
+    # @orders = @orders.select {|o| o.sales_order_id.match("(#{params[:order_num]})")} if params[:order_num]
   end
 
   def show

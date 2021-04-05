@@ -10,6 +10,9 @@ class Product < ApplicationRecord
     has_many :material_products, class_name: "ProductMaterial", foreign_key: :material_id
     has_many :products, through: :material_products
 
+    scope :for, ->(organization) {where('organization_id = ?', organization.id)}
+    scope :available_materials, -> (product, organization) {where}
+
     belongs_to :organization
 
     def available_materials
@@ -17,7 +20,7 @@ class Product < ApplicationRecord
         self.class.for(self.organization).where.not(id: taken_ids)
     end
 
-    def self.for(organization) 
-        self.where('organization_id = ?', organization.id)
-    end
+    # def self.for(organization) 
+    #     self.where('organization_id = ?', organization.id)
+    # end
 end
