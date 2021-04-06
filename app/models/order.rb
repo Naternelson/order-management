@@ -25,4 +25,5 @@ class Order < ApplicationRecord
     end
 
     ## THis should not be inlcuded in the main
+    #Neither should this
 end
