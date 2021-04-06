@@ -43,7 +43,7 @@ class Organization::OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    redirect_to organization_order_path(current_org)
+    redirect_to organization_orders_path(current_org)
   end
 
   private
