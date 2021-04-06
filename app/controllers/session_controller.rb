@@ -8,6 +8,7 @@ class SessionController < ApplicationController
         @user = User.find_by_email params[:email]
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
+            flash[:success] = ["Sign in successful"]
             redirect_to :root
         elsif @user 
             flash[:errors] = ["Incorrect Password"]
@@ -20,6 +21,7 @@ class SessionController < ApplicationController
 
     def destroy
         session.clear 
+        flash[:notice] = ["Logged out"]
         redirect_to :root
     end
 

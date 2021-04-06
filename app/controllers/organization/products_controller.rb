@@ -14,6 +14,7 @@ class Organization::ProductsController < ApplicationController
         @product = Product.new product_params
         @product.organization = current_org
         if @product.save 
+            flash[:success] = [@product.name << " saved"]
             redirect_to organization_product_path(current_org, @product)
         else
             flash[:errors] = @product.errors.full_messages
@@ -40,6 +41,7 @@ class Organization::ProductsController < ApplicationController
             @product = Product.find_by params[:id]
             @product.update(product_params)
             if @product.save
+                flash[:success] = [@product.name << " updated"]
                 redirect_to organization_product_path(current_org, @product)
             else
                 flash[:errors] = @product.errors.full_messages

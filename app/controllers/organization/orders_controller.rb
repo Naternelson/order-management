@@ -4,9 +4,6 @@ class Organization::OrdersController < ApplicationController
 
   def index
     @orders =  params[:order_num] ? Order.for(current_org).search_sales(params[:order_num]) : Order.for(current_org)
-    binding.pry
-    # @orders = Order.for current_org
-    # @orders = @orders.select {|o| o.sales_order_id.match("(#{params[:order_num]})")} if params[:order_num]
   end
 
   def show
@@ -26,6 +23,7 @@ class Organization::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.organization = current_org
     if @order.save
+      flash[:success] = [@order.sales_order_id << " saved"]
       redirect_to organization_orders_path(current_org)
     else
       flash[:errors] = @order.errors.full_messages
@@ -35,6 +33,7 @@ class Organization::OrdersController < ApplicationController
 
   def update
     if @order.update(order_params)
+      flash[:success] = [@order.sales_order_id << " updated"]
       redirect_to organization_order_path(current_org, @order)
     else
       flash[:errors] = @order.errors.full_messages

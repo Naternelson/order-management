@@ -13,7 +13,10 @@
   <body style="margin: 0;">
 
     <%= render partial: "navbar" %>
-    <%= yield %>
-    <%= render 'error_messages'%>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col"><%= yield %></div>
+      <div class="col-2"><%= render 'error_messages'%></div>
+    </div>
     </body>
 </html>

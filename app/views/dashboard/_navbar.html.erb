@@ -9,7 +9,7 @@
                     <a class="nav-link pl-0" href="/">Home <span class="sr-only">Home</span></a>
                 </li>
                 <li class="nav-item">
-                    <%= link_to "My Profile", user_path(current_user), class: "nav-link"%>
+                    <%= link_to "My Profile", edit_user_path(current_user), class: "nav-link"%>
                 </li>
                 <li class="nav-item">
                     <%= link_to "Logout", logout_path, method: :post, class: "nav-link" %>

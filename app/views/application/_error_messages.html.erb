@@ -1,11 +1,25 @@
 <div class="container">
-<% if flash[:errors] %>
-    <hr>
-    <h5>Errors:</h5>
-    <%  flash[:errors].each do |e| %>
-        <div class="d-flex flex-row justify-content-right">
-            <span class="text-danger"><%= e %></span>
-        </div>
+<h5>Messages:</h5>
+<hr>  
+<% flash.each do |k,v| %>
+    <%if k == "errors"%>
+        <% flash[k].each do |m| %>
+            <div class="d-flex flex-row justify-content-right">
+                <span class="text-danger"><%= m %></span>
+            </div>
+        <% end %>
+    <% elsif k == "success" %>
+        <% flash[k].each do |m| %>
+            <div class="d-flex flex-row justify-content-right">
+                <span class="text-success"><%= m %></span>
+            </div>
+        <% end %>
+    <% else %>
+        <% flash[k].each do |m| %>
+            <div class="d-flex flex-row justify-content-right">
+                <span class="text-dark"><%= m %></span>
+            </div>
+        <% end %>
     <% end %>
-<% end %>  
+<% end %>
 </div> 
