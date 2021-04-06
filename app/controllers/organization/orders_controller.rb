@@ -8,7 +8,7 @@ class Organization::OrdersController < ApplicationController
 
   def show
     order = Order.find_by sales_order_id: params[:order][:sales_order_id] if params[:order]
-    redirect_to order_path(order) if order
+    redirect_to organization_order_path(current_org, order) if order
   end
 
   def new

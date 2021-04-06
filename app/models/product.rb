@@ -15,6 +15,8 @@ class Product < ApplicationRecord
 
     belongs_to :organization
 
+    validates_presence_of :name
+    validates_uniqueness_of :name, scope: :organization_id
     def available_materials
         taken_ids = self.material_ids << self.id
         self.class.for(self.organization).where.not(id: taken_ids)
