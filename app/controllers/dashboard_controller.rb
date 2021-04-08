@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-    before_action :current_user
+    # before_action :current_user
+    
     layout 'dashboard'
     
     def index

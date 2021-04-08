@@ -12,6 +12,7 @@ class Product < ApplicationRecord
 
     scope :for, ->(organization) {where('organization_id = ?', organization.id)}
     scope :available_materials, -> (product, organization) {where}
+    scope :search_products, ->(search_query) {where("name LIKE ?", "%#{search_query}%")}
 
     belongs_to :organization
 
@@ -22,6 +23,9 @@ class Product < ApplicationRecord
         self.class.for(self.organization).where.not(id: taken_ids)
     end
 
+    def order_id=(o)
+        self.order_items.build(order_id: o)
+    end
     # def self.for(organization) 
     #     self.where('organization_id = ?', organization.id)
     # end

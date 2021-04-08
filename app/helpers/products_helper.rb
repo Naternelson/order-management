@@ -15,5 +15,8 @@ module ProductsHelper
         "#{string} #{pluralize(2, product.dimension_unit_type)}" unless string.empty?
     end
 
+    def new_product_form_path(order=nil)
+        order ? link_to("Add product",  new_organization_order_product_path(current_org, order)) : link_to("New Product", new_organization_product_path(current_org))
+    end
 
 end

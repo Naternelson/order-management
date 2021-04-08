@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     post "/logout", to: "session#destroy"
     resources :dashboard, only: [:create, :destroy]
     resources :orders do
-      resources :products, only: [:new]
+      resources :products, only: [:new, :index]
     end
     resources :products
     resources :product_materials, only: :destroy

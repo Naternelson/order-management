@@ -3,11 +3,17 @@ class Organization::ProductsController < ApplicationController
     before_action :redirect_if_outsider
     before_action :set_product, only: %i[new show edit update destroy ]
 
-    def index 
-        @products = Product.for current_org
+    def index
+        @order = Order.find_by id: params[:order_id]
+        if @order
+            @products = params[:product_name] ? @order.products.search_products(params[:product_name]) : @order.products
+        else
+            @products = params[:product_name] ? Product.for(current_org).search_products(params[:product_name]) : Product.for(current_org)
+        end
     end
 
     def new
+        @order_id = params[:order_id] 
     end
 
     def create
@@ -64,7 +70,7 @@ class Organization::ProductsController < ApplicationController
             :name, :description, :color,
             :height, :width, :length, 
             :dimension_unit_type, :weight,
-            :weight_unit_type, :unit_type
+            :weight_unit_type, :unit_type, :order_id
         )
     end
 

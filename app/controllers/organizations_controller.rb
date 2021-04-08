@@ -7,7 +7,7 @@ class OrganizationsController < ApplicationController
     def create 
         @organization = Organization.new organization_params
         if @organization.save
-            foo = @organization.organization_users.create(user: current_user, role: "admin")
+            @organization.organization_users.create(user: current_user, role: "admin")
             redirect_to root_path
         else
             flash[:errors] = @organization.errors.full_messages

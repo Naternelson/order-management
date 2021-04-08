@@ -1,0 +1,7 @@
+<%= form_with url: organization_products_path(current_org), method: "get" do |f| %>
+    <div class="form-group row">
+      <%= f.label :product_name, "Search", class: "col-sm-2 col-form-label text-right"%>
+      <div class="col-sm-8"><%= f.text_field :product_name, class: "form-control" %></div>
+      <div class="col-sm-1 align-middle"><%= f.submit "Search", class: "btn btn-primary btn-sm" %></div>
+    </div>
+<% end %>

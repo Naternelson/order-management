@@ -14,14 +14,16 @@
             <div class="col"><%= form_group f, :number_field, :width %></div>
             <div class="col"><%= form_group f, :number_field, :height %></div>
             <div class="col"><%= form_group f, :text_field, :dimension_unit_type %></div>
+            
         </div>
+        
         <div class="row">
             <div class="col"><%= form_group f, :number_field, :weight %></div>
             <div class="col"><%= form_group f, :number_field, :weight_unit_type %></div>
         </div>
         <hr/>
     </div>
-
+    <%= f.hidden_field :order_id, value: @order_id %>
     <div id = "Button Strip">
         <%= f.submit class: "form-control" %>    
     </div>

@@ -42,9 +42,12 @@
             <div class="row">
                 <div class="col">
                     <h5 class="text-center card-body">Product Information</h5>
+                    <div class="text-center"><h4><%= link_to "View Products", organization_order_products_path(current_org, order) %></h4></div>
                     <% order.order_items.each do |o|%>
                     <div class="row">
                         <div class="col">
+                          
+                          <br>
                           <%= render partial: "order_item", locals: {order_item: o} %>  
                         </div>
                     </div>
